@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import EyeTrainer from './components/EyeTrainer'
 
@@ -7,18 +7,42 @@ function App() {
   const [speed, setSpeed] = useState(5)
   const [isRunning, setIsRunning] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
+  const [duration, setDuration] = useState(3) // 训练时长（分钟）
+  const [remainingTime, setRemainingTime] = useState(0) // 剩余时间（秒）
 
-  const handleStart = () => setIsRunning(true)
+  const handleStart = () => {
+    setIsRunning(true)
+    setRemainingTime(duration * 60)
+  }
+
   const handlePause = () => setIsRunning(false)
+
   const handleStop = () => {
     setIsRunning(false)
-    // 可以添加其他重置逻辑
+    setRemainingTime(0)
   }
+
+  useEffect(() => {
+    let timer: number
+    if (isRunning && remainingTime > 0) {
+      timer = window.setInterval(() => {
+        setRemainingTime(prev => {
+          if (prev <= 1) {
+            handleStop()
+            alert('训练完成！')
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    return () => clearInterval(timer)
+  }, [isRunning, remainingTime])
 
   return (
     <div className="app">
       <div className="control-panel">
-        <h1>眼球训练</h1>
+        <h1>眼球训练 {remainingTime > 0 && `(${Math.floor(remainingTime / 60)}:${String(remainingTime % 60).padStart(2, '0')})`}</h1>
         <div className="main-controls">
           {!isRunning ? (
             <button onClick={handleStart} className="control-btn start">开始</button>
@@ -87,6 +111,23 @@ function App() {
                 onChange={(e) => setSpeed(Number(e.target.value))}
               />
               <span>{speed}秒/周期</span>
+            </div>
+            <div className="duration-control">
+              <h3>训练时长</h3>
+              <div className="duration-buttons">
+                <button
+                  className={duration === 3 ? 'active' : ''}
+                  onClick={() => setDuration(3)}
+                >
+                  3分钟
+                </button>
+                <button
+                  className={duration === 5 ? 'active' : ''}
+                  onClick={() => setDuration(5)}
+                >
+                  5分钟
+                </button>
+              </div>
             </div>
           </div>
         )}
