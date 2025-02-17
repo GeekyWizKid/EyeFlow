@@ -1,7 +1,7 @@
 .eye-trainer-container {
   position: relative;
-  width: min(90vw, 90vh);
-  height: min(90vw, 90vh);
+  width: min(95vw, 95vh);
+  height: min(95vw, 95vh);
   margin: 50px auto;
   display: flex;
   justify-content: center;
