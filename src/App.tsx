@@ -9,6 +9,9 @@ function App() {
   const [showSettings, setShowSettings] = useState(false)
   const [duration, setDuration] = useState(3) // 训练时长（分钟）
   const [remainingTime, setRemainingTime] = useState(0) // 剩余时间（秒）
+  const [dotColor, setDotColor] = useState('#2196f3') // 小球颜色
+  const [backgroundColor, setBackgroundColor] = useState('rgba(255, 255, 255, 0.1)') // 背景颜色
+  const [dotSize, setDotSize] = useState(20) // 小球大小
 
   const handleStart = () => {
     setIsRunning(true)
@@ -100,42 +103,71 @@ function App() {
                 随机运动
               </button>
             </div>
-            <div className="speed-control">
-              <h3>速度设置</h3>
-              <label>速度调节：</label>
+            <div className="speed-duration-controls">
+              <div className="control-group">
+                <h3>运动速度</h3>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={speed}
+                  onChange={(e) => setSpeed(Number(e.target.value))}
+                />
+                <span>{speed}秒/周期</span>
+              </div>
+              <div className="control-group">
+                <h3>训练时长</h3>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={duration}
+                  onChange={(e) => setDuration(Number(e.target.value))}
+                />
+                <span>{duration}分钟</span>
+              </div>
+            </div>
+            <div className="color-controls">
+              <div className="control-group">
+                <h3>小球颜色</h3>
+                <input
+                  type="color"
+                  value={dotColor}
+                  onChange={(e) => setDotColor(e.target.value)}
+                />
+              </div>
+              <div className="control-group">
+                <h3>背景颜色</h3>
+                <input
+                  type="color"
+                  value={backgroundColor.replace(/[^#\d]/g, '#')}
+                  onChange={(e) => setBackgroundColor(`${e.target.value}1a`)}
+                />
+              </div>
+            </div>
+            <div className="control-group">
+              <h3>小球大小</h3>
               <input
                 type="range"
-                min="1"
-                max="10"
-                value={speed}
-                onChange={(e) => setSpeed(Number(e.target.value))}
+                min="10"
+                max="50"
+                value={dotSize}
+                onChange={(e) => setDotSize(Number(e.target.value))}
               />
-              <span>{speed}秒/周期</span>
-            </div>
-            <div className="duration-control">
-              <h3>训练时长</h3>
-              <div className="duration-buttons">
-                <button
-                  className={duration === 3 ? 'active' : ''}
-                  onClick={() => setDuration(3)}
-                >
-                  3分钟
-                </button>
-                <button
-                  className={duration === 5 ? 'active' : ''}
-                  onClick={() => setDuration(5)}
-                >
-                  5分钟
-                </button>
-              </div>
+              <span>{dotSize}像素</span>
             </div>
           </div>
         )}
       </div>
 
-      <div className="trainer-container">
-        <EyeTrainer mode={mode} speed={speed} isRunning={isRunning} />
-      </div>
+      <EyeTrainer
+        mode={mode}
+        speed={speed}
+        isRunning={isRunning}
+        dotColor={dotColor}
+        backgroundColor={backgroundColor}
+        dotSize={dotSize}
+      />
     </div>
   )
 }
