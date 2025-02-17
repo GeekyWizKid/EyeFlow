@@ -23,3 +23,8 @@
   box-shadow: 0 0 25px rgba(33, 150, 243, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.8);
 }
+
+/* 隐藏训练区域的样式 */
+.eye-trainer-container.hidden {
+  display: none;
+}

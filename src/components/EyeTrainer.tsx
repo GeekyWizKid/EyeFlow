@@ -8,6 +8,7 @@ interface EyeTrainerProps {
   dotColor?: string; // 小球颜色
   backgroundColor?: string; // 背景颜色
   dotSize?: number; // 小球大小，单位：像素
+  containerClassName?: string; // 容器的额外类名
 }
 
 const EyeTrainer: React.FC<EyeTrainerProps> = ({
@@ -16,7 +17,8 @@ const EyeTrainer: React.FC<EyeTrainerProps> = ({
   isRunning = true,
   dotColor = '#2196f3',
   backgroundColor = 'rgba(255, 255, 255, 0.1)',
-  dotSize = 20
+  dotSize = 20,
+  containerClassName = ''
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [containerSize, setContainerSize] = useState(0);
@@ -113,17 +115,23 @@ const EyeTrainer: React.FC<EyeTrainerProps> = ({
     };
   }, [mode, speed, isRunning, containerSize, startTime]);
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <div 
-      className="eye-trainer-container"
+      className={`eye-trainer-container ${containerClassName}`} 
       style={{ background: backgroundColor }}
+      onTouchMove={handleTouchMove}
+      onTouchStart={(e) => e.preventDefault()}
     >
       <div
         className="training-dot"
         style={{
           transform: `translate(${position.x}px, ${position.y}px)`,
           background: `linear-gradient(145deg, ${dotColor}, ${adjustColor(dotColor, -20)})`,
-          boxShadow: `0 0 25px ${adjustColorOpacity(dotColor, 0.6)}`,
+          boxShadow: `${dotColor}99 0 0 25px`,
           width: `${dotSize}px`,
           height: `${dotSize}px`
         }}
@@ -143,15 +151,6 @@ const adjustColor = (color: string, amount: number): string => {
   g = Math.min(Math.max(0, g), 255);
   b = Math.min(Math.max(0, b), 255);
   return `#${(b | (g << 8) | (r << 16)).toString(16).padStart(6, '0')}`;
-};
-
-// 辅助函数：调整颜色透明度
-const adjustColorOpacity = (color: string, opacity: number): string => {
-  const hex = color.replace('#', '');
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
 
 export default EyeTrainer;
