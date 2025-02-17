@@ -211,3 +211,56 @@ button.active {
 .control-panel.hidden {
   display: none;
 }
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .control-panel {
+    flex: 1;
+    width: 100%;
+  }
+
+  .settings-panel {
+    padding: 1rem;
+  }
+
+  .control-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .control-group h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .control-group span {
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .speed-duration-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .color-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .mode-selector button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}
