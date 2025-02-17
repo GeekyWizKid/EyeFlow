@@ -1,7 +1,7 @@
 .eye-trainer-container {
   position: relative;
-  width: min(90vw, 90vh);
-  height: min(90vw, 90vh);
+  width: min(95vw, 95vh);
+  height: min(95vw, 95vh);
   margin: 50px auto;
   display: flex;
   justify-content: center;
@@ -22,4 +22,9 @@
   transition: transform 0.05s linear;
   box-shadow: 0 0 25px rgba(33, 150, 243, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* 隐藏训练区域的样式 */
+.eye-trainer-container.hidden {
+  display: none;
 }
