@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import './App.css'
 import EyeTrainer from './components/EyeTrainer'
 
@@ -12,17 +13,26 @@ function App() {
   const [dotColor, setDotColor] = useState('#2196f3') // 小球颜色
   const [backgroundColor, setBackgroundColor] = useState('rgba(255, 255, 255, 0.1)') // 背景颜色
   const [dotSize, setDotSize] = useState(20) // 小球大小
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const isMobile = useMediaQuery({ maxWidth: 768 })
+
+  const handlePause = () => {
+    setIsRunning(false)
+  }
 
   const handleStart = () => {
     setIsRunning(true)
     setRemainingTime(duration * 60)
+    if (isMobile) {
+      setIsFullscreen(true)
+      setShowSettings(false)
+    }
   }
-
-  const handlePause = () => setIsRunning(false)
 
   const handleStop = () => {
     setIsRunning(false)
     setRemainingTime(0)
+    setIsFullscreen(false)
   }
 
   useEffect(() => {
@@ -43,8 +53,8 @@ function App() {
   }, [isRunning, remainingTime])
 
   return (
-    <div className="app">
-      <div className="control-panel">
+    <div className={`app ${isFullscreen ? 'fullscreen-mode' : ''}`}>
+      <div className={`control-panel ${isFullscreen ? 'hidden' : ''}`}>
         <h1>眼球训练 {remainingTime > 0 && `(${Math.floor(remainingTime / 60)}:${String(remainingTime % 60).padStart(2, '0')})`}</h1>
         <div className="main-controls">
           {!isRunning ? (
@@ -167,6 +177,7 @@ function App() {
         dotColor={dotColor}
         backgroundColor={backgroundColor}
         dotSize={dotSize}
+        containerClassName={isMobile ? (isRunning ? 'fullscreen-mode' : 'hidden') : ''}
       />
     </div>
   )
