@@ -67,6 +67,14 @@ EyeFlow 是一款专业的眼部训练应用，通过多种科学的运动模式
 
 欢迎提交 Issue 和 Pull Request 来帮助改进这个项目！
 
+### 贡献者
+
+感谢所有为项目做出贡献的开发者！
+
+<a href="https://github.com/GeekyWizKid/EyeFlow/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=GeekyWizKid/EyeFlow" />
+</a>
+
 ## 📄 开源协议
 
 本项目采用 MIT 协议开源，欢迎自由使用和分享。
