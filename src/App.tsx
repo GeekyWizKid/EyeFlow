@@ -4,7 +4,7 @@ import './App.css'
 import EyeTrainer from './components/EyeTrainer'
 
 function App() {
-  const [mode, setMode] = useState<'circular' | 'horizontal' | 'vertical' | 'figure8' | 'spiral' | 'square' | 'random'>('circular')
+  const [mode, setMode] = useState<'circular' | 'horizontal' | 'vertical' | 'figure8' | 'spiral' | 'square' | 'random' | 'diagonal' | 'butterfly' | 'zShape' | 'diamond' | 'wave'>('circular')
   const [speed, setSpeed] = useState(5)
   const [isRunning, setIsRunning] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
@@ -74,43 +74,73 @@ function App() {
                 className={mode === 'circular' ? 'active' : ''}
                 onClick={() => setMode('circular')}
               >
-                圆周运动
+                ⭕ 圆周运动
               </button>
               <button
                 className={mode === 'horizontal' ? 'active' : ''}
                 onClick={() => setMode('horizontal')}
               >
-                水平运动
+                ↔️ 水平运动
               </button>
               <button
                 className={mode === 'vertical' ? 'active' : ''}
                 onClick={() => setMode('vertical')}
               >
-                垂直运动
+                ↕️ 垂直运动
               </button>
               <button
                 className={mode === 'figure8' ? 'active' : ''}
                 onClick={() => setMode('figure8')}
               >
-                8字运动
+                ∞ 8字运动
               </button>
               <button
                 className={mode === 'spiral' ? 'active' : ''}
                 onClick={() => setMode('spiral')}
               >
-                螺旋运动
+                🌀 螺旋运动
               </button>
               <button
                 className={mode === 'square' ? 'active' : ''}
                 onClick={() => setMode('square')}
               >
-                方形运动
+                ⬜ 方形运动
               </button>
               <button
                 className={mode === 'random' ? 'active' : ''}
                 onClick={() => setMode('random')}
               >
-                随机运动
+                🎲 随机运动
+              </button>
+              <button
+                className={mode === 'diagonal' ? 'active' : ''}
+                onClick={() => setMode('diagonal')}
+              >
+                ⤡ 对角线运动
+              </button>
+              <button
+                className={mode === 'butterfly' ? 'active' : ''}
+                onClick={() => setMode('butterfly')}
+              >
+                🦋 蝴蝶运动
+              </button>
+              <button
+                className={mode === 'zShape' ? 'active' : ''}
+                onClick={() => setMode('zShape')}
+              >
+                Z Z字形运动
+              </button>
+              <button
+                className={mode === 'diamond' ? 'active' : ''}
+                onClick={() => setMode('diamond')}
+              >
+                💎 菱形运动
+              </button>
+              <button
+                className={mode === 'wave' ? 'active' : ''}
+                onClick={() => setMode('wave')}
+              >
+                〰️ 波浪运动
               </button>
             </div>
             <div className="speed-duration-controls">
